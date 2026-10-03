@@ -1,0 +1,265 @@
+{
+  "input_file": "crop_production.csv",
+  "cleaning": {
+    "rows_raw": 246091,
+    "rows_after_basic_cleaning": 236881,
+    "extreme_outliers_removed": 1541,
+    "rows_final": 235340
+  },
+  "data": {
+    "rows_model": 234782,
+    "train_rows": 197786,
+    "test_rows": 36996,
+    "train_years": [
+      1997,
+      2011
+    ],
+    "test_years": [
+      2012,
+      2013,
+      2014
+    ],
+    "dropped_partial_years": [
+      2015
+    ],
+    "history_coverage_test_pct": 87.8,
+    "crops": 104,
+    "states": 33
+  },
+  "features": {
+    "categorical": [
+      "State_Name",
+      "Crop",
+      "Season"
+    ],
+    "numeric_base": [
+      "Crop_Year",
+      "log_area"
+    ],
+    "history": [
+      "yield_lag1",
+      "yield_prior_mean"
+    ]
+  },
+  "tuning": {
+    "best_params": {
+      "l2_regularization": 0.1,
+      "learning_rate": 0.03416117764127045,
+      "max_iter": 400,
+      "max_leaf_nodes": 127,
+      "min_samples_leaf": 50
+    },
+    "cv_mae_log_subsample": 0.1122,
+    "n_iter": 10,
+    "cv_folds": 3,
+    "tuning_rows": 60000,
+    "cv_r2_mean": 0.958,
+    "cv_r2_std": 0.002
+  },
+  "train_vs_test": {
+    "train_log_r2": 0.9709,
+    "test_log_r2": 0.9391
+  },
+  "models": [
+    {
+      "model": "Baseline (crop median)",
+      "log_mae": 0.2769,
+      "log_rmse": 0.4014,
+      "log_r2": 0.8122,
+      "mae_tha": 2.1982,
+      "rmse_tha": 6.8602,
+      "r2_raw": 0.7178,
+      "mdape_pct": 36.3545,
+      "within25_pct": 35.1579,
+      "bias_log": -0.1081
+    },
+    {
+      "model": "Ridge regression",
+      "log_mae": 0.194,
+      "log_rmse": 0.2838,
+      "log_r2": 0.9061,
+      "mae_tha": 1.5256,
+      "rmse_tha": 5.1183,
+      "r2_raw": 0.8429,
+      "mdape_pct": 26.4063,
+      "within25_pct": 47.6835,
+      "bias_log": 0.003
+    },
+    {
+      "model": "Random forest",
+      "log_mae": 0.1471,
+      "log_rmse": 0.2695,
+      "log_r2": 0.9153,
+      "mae_tha": 1.1434,
+      "rmse_tha": 4.5938,
+      "r2_raw": 0.8735,
+      "mdape_pct": 15.1031,
+      "within25_pct": 66.5694,
+      "bias_log": -0.0043
+    },
+    {
+      "model": "Gradient boosting (default)",
+      "log_mae": 0.135,
+      "log_rmse": 0.2282,
+      "log_r2": 0.9393,
+      "mae_tha": 1.0744,
+      "rmse_tha": 4.2419,
+      "r2_raw": 0.8921,
+      "mdape_pct": 15.3104,
+      "within25_pct": 67.7533,
+      "bias_log": -0.0066
+    },
+    {
+      "model": "Gradient boosting (tuned)",
+      "log_mae": 0.1331,
+      "log_rmse": 0.2286,
+      "log_r2": 0.9391,
+      "mae_tha": 1.0254,
+      "rmse_tha": 4.0311,
+      "r2_raw": 0.9026,
+      "mdape_pct": 14.715,
+      "within25_pct": 67.9722,
+      "bias_log": -0.0028
+    },
+    {
+      "model": "Gradient boosting (no history features)",
+      "log_mae": 0.1622,
+      "log_rmse": 0.2645,
+      "log_r2": 0.9185,
+      "mae_tha": 1.2631,
+      "rmse_tha": 4.6195,
+      "r2_raw": 0.8721,
+      "mdape_pct": 19.4662,
+      "within25_pct": 59.5821,
+      "bias_log": -0.0218
+    }
+  ],
+  "best_model": "Gradient boosting (default)",
+  "residuals": {
+    "mean": -0.0066,
+    "std": 0.2281
+  },
+  "importance": [
+    {
+      "feature": "yield_prior_mean",
+      "importance": 0.334,
+      "std": 0.0011
+    },
+    {
+      "feature": "Crop",
+      "importance": 0.208,
+      "std": 0.0017
+    },
+    {
+      "feature": "yield_lag1",
+      "importance": 0.0786,
+      "std": 0.0009
+    },
+    {
+      "feature": "State_Name",
+      "importance": 0.0209,
+      "std": 0.0004
+    },
+    {
+      "feature": "Season",
+      "importance": 0.0022,
+      "std": 0.0001
+    },
+    {
+      "feature": "log_area",
+      "importance": 0.001,
+      "std": 0.0001
+    },
+    {
+      "feature": "Crop_Year",
+      "importance": 0.0,
+      "std": 0.0
+    }
+  ],
+  "crop_errors": [
+    {
+      "crop": "Rice",
+      "n": 2386,
+      "mdape_pct": 10.801,
+      "mae_tha": 0.362,
+      "mean_yield": 2.35
+    },
+    {
+      "crop": "Maize",
+      "n": 2368,
+      "mdape_pct": 15.056,
+      "mae_tha": 0.612,
+      "mean_yield": 2.658
+    },
+    {
+      "crop": "Moong(Green Gram)",
+      "n": 1831,
+      "mdape_pct": 18.647,
+      "mae_tha": 0.131,
+      "mean_yield": 0.528
+    },
+    {
+      "crop": "Urad",
+      "n": 1663,
+      "mdape_pct": 15.977,
+      "mae_tha": 0.119,
+      "mean_yield": 0.565
+    },
+    {
+      "crop": "Groundnut",
+      "n": 1349,
+      "mdape_pct": 14.353,
+      "mae_tha": 0.284,
+      "mean_yield": 1.373
+    },
+    {
+      "crop": "Sesamum",
+      "n": 1278,
+      "mdape_pct": 17.309,
+      "mae_tha": 0.096,
+      "mean_yield": 0.443
+    },
+    {
+      "crop": "Onion",
+      "n": 1136,
+      "mdape_pct": 20.061,
+      "mae_tha": 2.7,
+      "mean_yield": 13.059
+    },
+    {
+      "crop": "Arhar/Tur",
+      "n": 1136,
+      "mdape_pct": 19.171,
+      "mae_tha": 0.221,
+      "mean_yield": 0.874
+    },
+    {
+      "crop": "Wheat",
+      "n": 1123,
+      "mdape_pct": 11.336,
+      "mae_tha": 0.4,
+      "mean_yield": 2.287
+    },
+    {
+      "crop": "Sugarcane",
+      "n": 1116,
+      "mdape_pct": 12.672,
+      "mae_tha": 12.012,
+      "mean_yield": 62.025
+    },
+    {
+      "crop": "Rapeseed &Mustard",
+      "n": 1070,
+      "mdape_pct": 17.307,
+      "mae_tha": 0.184,
+      "mean_yield": 0.833
+    },
+    {
+      "crop": "Potato",
+      "n": 1055,
+      "mdape_pct": 13.153,
+      "mae_tha": 2.484,
+      "mean_yield": 13.917
+    }
+  ]
+}
