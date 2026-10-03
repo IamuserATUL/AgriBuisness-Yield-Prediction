@@ -80,3 +80,11 @@ before running on the real data.
 ## License
 
 MIT
+
+
+   ## Sample Results
+
+   ![Model comparison](outputs/figures/01_model_comparison.png)
+   ![Actual vs predicted](outputs/figures/02_actual_vs_predicted.png)
+   ![Feature importance](outputs/figures/04_feature_importance.png)
+   ![Error by crop](outputs/figures/05_error_by_crop.png)
